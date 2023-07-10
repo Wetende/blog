@@ -15,11 +15,30 @@ class Post extends Model
     protected $table = 'post';
 
     
-    protected $fillable = ['title','id', 'body'];
+    protected $fillable = [
+        'cover_image', 
+        'title',
+        'body',
+        'meta_description',
+        'published_at',
+        'featured',
+        'author_id',
+        'category_id'
+    ];
+
+    public function id(): int
+    {
+        return $this->id;
+    }
+
+    public function title(): string
+    {
+        return $this->title;
+    }
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class)->withDefault('Admin User');
+        return $this->belongsTo(User::class, 'author_id')->withDefault('Cyprian Wetende');
     }
 
     public function tags(): RelationsBelongsToMany
