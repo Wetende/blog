@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Factories\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasMany as RelationsHasMany;
 
 class User extends Authenticatable
 {
@@ -58,4 +60,10 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    
+    public function posts(): RelationsHasMany
+    {
+        return $this->hasMany(Post::class);
+    }
 }
